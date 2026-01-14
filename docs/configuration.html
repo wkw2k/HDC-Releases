@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfiguration - HDC Dokumentation</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f8f9fa; color: #333; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 0; text-align: center; }
+        h1 { margin: 0; font-size: 2.5em; font-weight: 300; }
+        .content { background: white; padding: 40px; border-radius: 8px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #667eea; border-bottom: 2px solid #667eea; padding-bottom: 10px; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: 'Consolas', monospace; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .config-section { background: #f8f9fa; padding: 20px; margin: 20px 0; border-radius: 5px; border-left: 4px solid #667eea; }
+        .param-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .param-table th, .param-table td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        .param-table th { background: #f8f9fa; font-weight: bold; }
+        .warning { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 15px 0; }
+        .info { background: #d1ecf1; border-left: 4px solid #17a2b8; padding: 15px; margin: 15px 0; }
+        nav { background: #343a40; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        nav a { color: #adb5bd; text-decoration: none; margin: 0 15px; }
+        nav a:hover { color: white; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>HDC Konfiguration</h1>
+            <p>Detaillierte Anleitung zur Konfiguration aller Komponenten</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <a href="index.html">← Zurück zur Startseite</a> |
+            <a href="installation.html">Installation</a> |
+            <a href="troubleshooting.html">Problembehebung</a>
+        </nav>
+
+        <div class="content">
+            <div class="warning">
+                <strong>⚠️ Sicherheitshinweis:</strong> Speichern Sie die Konfiguration an einem sicheren Ort. Sie enthält sensible Verbindungsdaten und Authentifizierungsinformationen.
+            </div>
+
+            <h2>🔧 Konfigurationsübersicht</h2>
+            <p>Die Konfiguration erfolgt über die <code>config.json</code> Datei im Programm-Verzeichnis. Verwenden Sie die UI unter <strong>"Datei → Einstellungen"</strong> für eine benutzerfreundliche Konfiguration.</p>
+
+            <div class="config-section">
+                <h3>📍 Konfigurationsdatei</h3>
+                <p><strong>Pfad:</strong> <code>C:\ProgramData\Hapak-DocBox(R)-Connector\config.json</code></p>
+                <p><strong>Backup:</strong> Erstellen Sie regelmäßig Backups dieser Datei.</p>
+                <p><strong>Berechtigungen:</strong> Die Datei sollte nur für Administratoren und das HDC-System zugänglich sein.</p>
+            </div>
+
+            <h2>🗄️ Datenbank-Konfiguration (Hapak)</h2>
+            <table class="param-table">
+                <tr>
+                    <th>Parameter</th>
+                    <th>Beschreibung</th>
+                    <th>Beispiel</th>
+                </tr>
+                <tr>
+                    <td><code>ServerAddress</code></td>
+                    <td>PostgreSQL Server-Adresse</td>
+                    <td><code>hapak-server.company.local</code></td>
+                </tr>
+                <tr>
+                    <td><code>Port</code></td>
+                    <td>PostgreSQL Port (Standard: 5432)</td>
+                    <td><code>5432</code></td>
+                </tr>
+                <tr>
+                    <td><code>DatabaseName</code></td>
+                    <td>Name der Hapak-Datenbank</td>
+                    <td><code>hapak_prod</code></td>
+                </tr>
+                <tr>
+                    <td><code>UserName</code></td>
+                    <td>Datenbank-Benutzername</td>
+                    <td><code>hapak_user</code></td>
+                </tr>
+                <tr>
+                    <td><code>Password</code></td>
+                    <td>Datenbank-Passwort (verschlüsselt gespeichert)</td>
+                    <td><code>********</code></td>
+                </tr>
+            </table>
+
+            <div class="info">
+                <strong>💡 Tipp:</strong> Die Datenbank-Verbindungsdaten werden automatisch verschlüsselt gespeichert und sind nur für das HDC-System zugänglich.
+            </div>
+
+            <h2>🌐 DocBox-API Konfiguration</h2>
+            <table class="param-table">
+                <tr>
+                    <th>Parameter</th>
+                    <th>Beschreibung</th>
+                    <th>Beispiel</th>
+                </tr>
+                <tr>
+                    <td><code>Protocol</code></td>
+                    <td>HTTP oder HTTPS</td>
+                    <td><code>https</code></td>
+                </tr>
+                <tr>
+                    <td><code>ServerAddress</code></td>
+                    <td>DocBox Server-Adresse</td>
+                    <td><code>docbox.company.local</code></td>
+                </tr>
+                <tr>
+                    <td><code>Port</code></td>
+                    <td>DocBox API Port</td>
+                    <td><code>8081</code></td>
+                </tr>
+                <tr>
+                    <td><code>ParentFolderId</code></td>
+                    <td>Root-Ordner ID in DocBox</td>
+                    <td><code>3078</code></td>
+                </tr>
+                <tr>
+                    <td><code>MandatorName</code></td>
+                    <td>DocBox Mandant-Name</td>
+                    <td><code>COMPANY</code></td>
+                </tr>
+                <tr>
+                    <td><code>ApiKey</code></td>
+                    <td>DocBox API-Schlüssel (verschlüsselt)</td>
+                    <td><code>********</code></td>
+                </tr>
+            </table>
+
+            <h2>📁 Datei-Verarbeitung Konfiguration</h2>
+            <table class="param-table">
+                <tr>
+                    <th>Parameter</th>
+                    <th>Beschreibung</th>
+                    <th>Beispiel</th>
+                </tr>
+                <tr>
+                    <td><code>HotFolder</code></td>
+                    <td>Ordner für eingehende Dateien</td>
+                    <td><code>C:\HDC\HotFolder</code></td>
+                </tr>
+                <tr>
+                    <td><code>CompletedImportFolder</code></td>
+                    <td>Ordner für erfolgreich verarbeitete Dateien</td>
+                    <td><code>C:\HDC\Processed</code></td>
+                </tr>
+                <tr>
+                    <td><code>FallbackFolderId</code></td>
+                    <td>DocBox Ordner-ID für fehlerhafte Dateien</td>
+                    <td><code>12345</code></td>
+                </tr>
+                <tr>
+                    <td><code>IntervalOperation</code></td>
+                    <td>Zeitgesteuerte Verarbeitung aktivieren</td>
+                    <td><code>true</code></td>
+                </tr>
+                <tr>
+                    <td><code>FileImportInterval</code></td>
+                    <td>Verarbeitungsintervall in Minuten</td>
+                    <td><code>30</code></td>
+                </tr>
+            </table>
+
+            <h2>📋 Dokument-Mapping Konfiguration</h2>
+            <p>Konfiguration der Dateinamens-Patterns für die automatische Klassifizierung:</p>
+
+            <table class="param-table">
+                <tr>
+                    <th>Pattern</th>
+                    <th>DocType</th>
+                    <th>Beispiel-Dateiname</th>
+                </tr>
+                <tr>
+                    <td><code>RG_*.pdf</code></td>
+                    <td><code>Rechnung</code></td>
+                    <td><code>RG_20250113_ABC123_Project.pdf</code></td>
+                </tr>
+                <tr>
+                    <td><code>LS_*.pdf</code></td>
+                    <td><code>Lieferschein</code></td>
+                    <td><code>LS_20250113_ABC123_Project.pdf</code></td>
+                </tr>
+                <tr>
+                    <td><code>AN_*.pdf</code></td>
+                    <td><code>Angebot</code></td>
+                    <td><code>AN_20250113_ABC123_Project.pdf</code></td>
+                </tr>
+            </table>
+
+            <h2>⏰ Upload-Zeitplan</h2>
+            <p>Konfiguration der Uhrzeiten für automatische Uploads:</p>
+            <pre><code>"UploadTimes": [
+  "09:00:00",
+  "14:00:00",
+  "17:30:00"
+]</code></pre>
+
+            <h2>🔧 Erweiterte Einstellungen</h2>
+            <table class="param-table">
+                <tr>
+                    <th>Parameter</th>
+                    <th>Beschreibung</th>
+                    <th>Standard</th>
+                </tr>
+                <tr>
+                    <td><code>LogLevel</code></td>
+                    <td>Detailgrad der Protokollierung</td>
+                    <td><code>Information</code></td>
+                </tr>
+            </table>
+
+            <div class="warning">
+                <strong>⚠️ Wichtige Hinweise:</strong>
+                <ul>
+                    <li>Testen Sie die Konfiguration in einer Entwicklungs-Umgebung</li>
+                    <li>Überprüfen Sie die Netzwerkverbindungen vor dem Produktiveinsatz</li>
+                    <li>Dokumentieren Sie alle Konfigurationsänderungen</li>
+                    <li>Erstellen Sie regelmäßige Backups der Konfiguration</li>
+                </ul>
+            </div>
+
+            <h2>🧪 Konfiguration testen</h2>
+            <ol>
+                <li><strong>Datenbank-Verbindung:</strong> Testen Sie die Hapak-Verbindung</li>
+                <li><strong>DocBox-API:</strong> Überprüfen Sie die API-Verfügbarkeit</li>
+                <li><strong>Dateipfade:</strong> Stellen Sie sicher, dass alle Ordner existieren</li>
+                <li><strong>Berechtigungen:</strong> Überprüfen Sie Lese-/Schreibrechte</li>
+                <li><strong>Test-Datei:</strong> Laden Sie eine Testdatei hoch</li>
+            </ol>
+
+            <p>Detaillierte Fehlerbehebung: <a href="troubleshooting.html">Problembehebung</a></p>
+        </div>
+    </div>
+</body>
+</html>

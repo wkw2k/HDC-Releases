@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation - HDC Dokumentation</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f8f9fa; color: #333; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 0; text-align: center; }
+        h1 { margin: 0; font-size: 2.5em; font-weight: 300; }
+        .content { background: white; padding: 40px; border-radius: 8px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #667eea; border-bottom: 2px solid #667eea; padding-bottom: 10px; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: 'Consolas', monospace; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .step { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px; margin: 15px 0; }
+        .warning { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 15px 0; }
+        nav { background: #343a40; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        nav a { color: #adb5bd; text-decoration: none; margin: 0 15px; }
+        nav a:hover { color: white; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>HDC Installation</h1>
+            <p>Schritt-für-Schritt Anleitung zur Installation des Hapak-DocBox-Connectors</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <a href="index.html">← Zurück zur Startseite</a> |
+            <a href="configuration.html">Konfiguration</a> |
+            <a href="troubleshooting.html">Problembehebung</a>
+        </nav>
+
+        <div class="content">
+            <h2>📦 Systemvoraussetzungen</h2>
+            <ul>
+                <li><strong>Betriebssystem:</strong> Windows 10/11 (64-bit)</li>
+                <li><strong>.NET Runtime:</strong> .NET 8.0 Desktop Runtime (wird automatisch installiert)</li>
+                <li><strong>Arbeitsspeicher:</strong> Mindestens 4 GB RAM</li>
+                <li><strong>Festplattenspeicher:</strong> 500 MB freier Speicher</li>
+                <li><strong>Netzwerk:</strong> Internetzugang für Updates und DocBox-API</li>
+            </ul>
+
+            <div class="warning">
+                <strong>Administrator-Rechte:</strong> Die Installation erfordert Administrator-Rechte für die Installation der Windows-Dienste.
+            </div>
+
+            <h2>🚀 Installation durchführen</h2>
+
+            <div class="step">
+                <h3>Schritt 1: Installer herunterladen</h3>
+                <p>Laden Sie die neueste Version von der <a href="https://github.com/wkw2k/HDC-Hapak-Docbox-R--Connector/releases">GitHub Releases</a> Seite herunter.</p>
+                <p>Wählen Sie die Datei <code>HDC-Setup-[Version].exe</code> aus.</p>
+            </div>
+
+            <div class="step">
+                <h3>Schritt 2: Installer ausführen</h3>
+                <ol>
+                    <li>Klicken Sie mit der rechten Maustaste auf <code>HDC-Setup-[Version].exe</code></li>
+                    <li>Wählen Sie <strong>"Als Administrator ausführen"</strong></li>
+                    <li>Folgen Sie dem Installationsassistenten</li>
+                    <li>Akzeptieren Sie die Standard-Installationspfade</li>
+                </ol>
+            </div>
+
+            <div class="step">
+                <h3>Schritt 3: Lizenz installieren</h3>
+                <p>Nach der Installation:</p>
+                <ol>
+                    <li>Starten Sie die HDC-Anwendung</li>
+                    <li>Gehen Sie zu <strong>"Hilfe → Über HDC"</strong> für Lizenzinformationen</li>
+                    <li>Kontaktieren Sie den Support für eine gültige Lizenz</li>
+                    <li>Verwenden Sie <strong>"Datei → Einstellungen"</strong> um die Lizenz zu laden</li>
+                </ol>
+            </div>
+
+            <div class="step">
+                <h3>Schritt 4: Konfiguration</h3>
+                <p>Konfigurieren Sie die Verbindungen:</p>
+                <ul>
+                    <li><strong>Hapak-Datenbank:</strong> PostgreSQL-Verbindung</li>
+                    <li><strong>DocBox-Server:</strong> API-Endpunkt und Authentifizierung</li>
+                    <li><strong>Dateipfade:</strong> Hot-Folder, Archive, Fallback-Ordner</li>
+                </ul>
+                <p>Detaillierte Konfigurationsanleitung: <a href="configuration.html">Konfiguration</a></p>
+            </div>
+
+            <h2>🔧 Nach der Installation</h2>
+
+            <h3>Windows-Dienste überprüfen</h3>
+            <p>Öffnen Sie <code>services.msc</code> und überprüfen Sie:</p>
+            <ul>
+                <li><code>HDC FileUploadWorker</code> - Sollte automatisch gestartet sein</li>
+                <li><code>HDC ProjectCreationWorker</code> - Sollte automatisch gestartet sein</li>
+            </ul>
+
+            <h3>Erste Tests</h3>
+            <ol>
+                <li>Starten Sie die HDC-Anwendung</li>
+                <li>Überprüfen Sie die Service-Status-Indikatoren</li>
+                <li>Testen Sie eine Beispiel-Datei im Hot-Folder</li>
+                <li>Überprüfen Sie die Logs unter <code>C:\ProgramData\Hapak-DocBox(R)-Connector\Logs\</code></li>
+            </ol>
+
+            <h2>🆘 Problembehebung</h2>
+            <p>Bei Problemen:</p>
+            <ul>
+                <li>Überprüfen Sie die <a href="troubleshooting.html">Problembehebung</a></li>
+                <li>Kontaktieren Sie den Support: <a href="mailto:support@wkw2k.de">support@wkw2k.de</a></li>
+                <li>Erstellen Sie ein Issue auf <a href="https://github.com/wkw2k/HDC-Hapak-Docbox-R--Connector/issues">GitHub</a></li>
+            </ul>
+
+            <div class="warning">
+                <strong>Wichtig:</strong> Bei der Erstinstallation sollten Sie eine Testumgebung verwenden, bevor Sie die Produktionsumgebung konfigurieren.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

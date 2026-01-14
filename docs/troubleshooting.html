@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problembehebung - HDC Dokumentation</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f8f9fa; color: #333; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 0; text-align: center; }
+        h1 { margin: 0; font-size: 2.5em; font-weight: 300; }
+        .content { background: white; padding: 40px; border-radius: 8px; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #667eea; border-bottom: 2px solid #667eea; padding-bottom: 10px; }
+        h3 { color: #495057; }
+        code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: 'Consolas', monospace; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .issue { background: #f8d7da; border-left: 4px solid #dc3545; padding: 15px; margin: 15px 0; }
+        .solution { background: #d4edda; border-left: 4px solid #28a745; padding: 15px; margin: 15px 0; }
+        .warning { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin: 15px 0; }
+        .info { background: #d1ecf1; border-left: 4px solid #17a2b8; padding: 15px; margin: 15px 0; }
+        nav { background: #343a40; color: white; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        nav a { color: #adb5bd; text-decoration: none; margin: 0 15px; }
+        nav a:hover { color: white; }
+        .checklist { list-style: none; padding: 0; }
+        .checklist li { padding: 5px 0; }
+        .checklist li:before { content: "☑"; color: #28a745; margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>HDC Problembehebung</h1>
+            <p>Lösungen für häufige Probleme und Fehlerbehebung</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <a href="index.html">← Zurück zur Startseite</a> |
+            <a href="installation.html">Installation</a> |
+            <a href="configuration.html">Konfiguration</a>
+        </nav>
+
+        <div class="content">
+            <h2>🔍 Diagnose-Tools</h2>
+
+            <div class="info">
+                <h3>Log-Dateien überprüfen</h3>
+                <p>Alle wichtigen Logs finden Sie unter:</p>
+                <ul>
+                    <li><strong>Anwendungs-Logs:</strong> <code>C:\ProgramData\Hapak-DocBox(R)-Connector\Logs\</code></li>
+                    <li><strong>Worker-Logs:</strong> <code>ProjectCreationWorker-*.log</code>, <code>FileUploadWorker-*.log</code></li>
+                    <li><strong>Event-Viewer:</strong> Windows Event-Viewer → Windows Logs → Application</li>
+                </ul>
+            </div>
+
+            <div class="info">
+                <h3>Service-Status prüfen</h3>
+                <pre><code># Windows Services Konsole öffnen
+services.msc
+
+# Oder per PowerShell:
+Get-Service -Name "*HDC*"</code></pre>
+            </div>
+
+            <h2>🚨 Häufige Probleme</h2>
+
+            <div class="issue">
+                <h3>❌ Lizenz-Fehler</h3>
+                <p><strong>Symptom:</strong> "Keine gültige Lizenz gefunden" oder "Zugriff verweigert"</p>
+            </div>
+
+            <div class="solution">
+                <h4>✅ Lösung:</h4>
+                <ol>
+                    <li>Überprüfen Sie die Lizenzdatei: <code>C:\ProgramData\Hapak-DocBox(R)-Connector\hdc.software.lic</code></li>
+                    <li>Verwenden Sie "Lizenz einlesen" in der Anwendung</li>
+                    <li>Kontaktieren Sie den Support für eine neue Lizenz</li>
+                    <li>Überprüfen Sie das Ablaufdatum der Lizenz</li>
+                </ol>
+            </div>
+
+            <div class="issue">
+                <h3>❌ Datenbank-Verbindungsfehler</h3>
+                <p><strong>Symptom:</strong> "PostgreSQL connection failed" oder ähnliche DB-Fehler</p>
+            </div>
+
+            <div class="solution">
+                <h4>✅ Lösung:</h4>
+                <ol>
+                    <li>Überprüfen Sie die Hapak-Datenbank-Konfiguration</li>
+                    <li>Testen Sie die Netzwerkverbindung: <code>ping [hapak-server]</code></li>
+                    <li>Verifizieren Sie Benutzername und Passwort</li>
+                    <li>Stellen Sie sicher, dass PostgreSQL läuft und Port 5432 erreichbar ist</li>
+                    <li>Überprüfen Sie Firewall-Einstellungen</li>
+                </ol>
+            </div>
+
+            <div class="issue">
+                <h3>❌ DocBox-API Fehler</h3>
+                <p><strong>Symptom:</strong> "DocBox connection failed" oder "API authentication failed"</p>
+            </div>
+
+            <div class="solution">
+                <h4>✅ Lösung:</h4>
+                <ol>
+                    <li>Überprüfen Sie die DocBox-Server-Konfiguration</li>
+                    <li>Testen Sie die API-Verbindung: <code>curl -k https://[docbox-server]:[port]/api/status</code></li>
+                    <li>Verifizieren Sie API-Schlüssel und Mandator-Name</li>
+                    <li>Überprüfen Sie SSL-Zertifikate (falls HTTPS verwendet wird)</li>
+                    <li>Kontaktieren Sie den DocBox-Administrator</li>
+                </ol>
+            </div>
+
+            <div class="issue">
+                <h3>❌ Worker-Dienste starten nicht</h3>
+                <p><strong>Symptom:</strong> FileUploadWorker oder ProjectCreationWorker starten nicht</p>
+            </div>
+
+            <div class="solution">
+                <h4>✅ Lösung:</h4>
+                <ol>
+                    <li>Überprüfen Sie den Service-Status: <code>services.msc</code></li>
+                    <li>Starten Sie die Dienste manuell</li>
+                    <li>Überprüfen Sie die Worker-Logs</li>
+                    <li>Stellen Sie sicher, dass alle Konfigurationsdateien vorhanden sind</li>
+                    <li>Überprüfen Sie die Berechtigungen des Service-Kontos</li>
+                </ol>
+            </div>
+
+            <div class="issue">
+                <h3>❌ Dateien werden nicht verarbeitet</h3>
+                <p><strong>Symptom:</strong> Dateien im HotFolder werden nicht verschoben</p>
+            </div>
+
+            <div class="solution">
+                <h4>✅ Lösung:</h4>
+                <ol>
+                    <li>Überprüfen Sie den HotFolder-Pfad in der Konfiguration</li>
+                    <li>Stellen Sie sicher, dass der FileUploadWorker läuft</li>
+                    <li>Überprüfen Sie Datei-Berechtigungen</li>
+                    <li>Prüfen Sie das Dateinamens-Format (muss DocType_Projekt_Jahr entsprechen)</li>
+                    <li>Überprüfen Sie die Worker-Logs auf Parsing-Fehler</li>
+                </ol>
+            </div>
+
+            <div class="issue">
+                <h3>❌ Update-Fehler</h3>
+                <p><strong>Symptom:</strong> "Update check failed" oder Download-Fehler</p>
+            </div>
+
+            <div class="solution">
+                <h4>✅ Lösung:</h4>
+                <ol>
+                    <li>Überprüfen Sie die Internetverbindung</li>
+                    <li>Deaktivieren Sie temporär die Firewall/Virenscanner</li>
+                    <li>Versuchen Sie es später nochmal (GitHub API kann Limits haben)</li>
+                    <li>Laden Sie Updates manuell von GitHub Releases herunter</li>
+                </ol>
+            </div>
+
+            <h2>🛠️ Erweiterte Diagnose</h2>
+
+            <h3>Konfiguration zurücksetzen</h3>
+            <div class="warning">
+                <strong>Achtung:</strong> Dies löscht alle Einstellungen. Erstellen Sie vorher ein Backup!
+            </div>
+            <pre><code># Konfiguration löschen und neu initialisieren
+Remove-Item "C:\ProgramData\Hapak-DocBox(R)-Connector\config.json"
+# Starten Sie die Anwendung neu für automatische Initialisierung</code></pre>
+
+            <h3>Worker-Services neu installieren</h3>
+            <pre><code># Services deinstallieren
+sc delete "HDC FileUploadWorker"
+sc delete "HDC ProjectCreationWorker"
+
+# Anwendung neu installieren oder Services manuell registrieren
+# Die Setup-Datei sollte die Services automatisch registrieren</code></pre>
+
+            <h3>Debug-Modus aktivieren</h3>
+            <ol>
+                <li>Öffnen Sie die Anwendung</li>
+                <li>Gehen Sie zu <strong>Hilfe → Entwicklermodus → Entwicklermodus aktivieren</strong></li>
+                <li>Geben Sie das Passwort ein (standardmäßig "dev123")</li>
+                <li>Überprüfen Sie die erweiterten Logs</li>
+            </ol>
+
+            <h2>📞 Support kontaktieren</h2>
+            <div class="info">
+                <p>Wenn keine der oben genannten Lösungen hilft:</p>
+                <ul>
+                    <li><strong>E-Mail:</strong> <a href="mailto:support@wkw2k.de">support@wkw2k.de</a></li>
+                    <li><strong>GitHub Issues:</strong> <a href="https://github.com/wkw2k/HDC-Hapak-Docbox-R--Connector/issues">Report a bug</a></li>
+                    <li><strong>Logs beifügen:</strong> Schicken Sie relevante Log-Dateien mit</li>
+                    <li><strong>Konfiguration:</strong> Anonymisieren Sie sensible Daten vor dem Versand</li>
+                </ul>
+            </div>
+
+            <h2>🔍 System-Checkliste</h2>
+            <div class="info">
+                <p>Überprüfen Sie diese Punkte bei der Diagnose:</p>
+                <ul class="checklist">
+                    <li>Lizenz ist gültig und nicht abgelaufen</li>
+                    <li>Alle Windows-Dienste laufen (services.msc)</li>
+                    <li>Netzwerkverbindungen zu Hapak und DocBox funktionieren</li>
+                    <li>Datei-Berechtigungen sind korrekt gesetzt</li>
+                    <li>Konfigurationsdateien sind nicht beschädigt</li>
+                    <li>Genug freier Speicherplatz vorhanden</li>
+                    <li>Firewall blockiert keine Verbindungen</li>
+                    <li>Zeit- und Datum-Einstellungen sind korrekt</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
